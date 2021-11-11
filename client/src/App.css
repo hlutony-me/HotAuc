@@ -4,6 +4,7 @@ body {
 
 .sidebar {
   margin-top: 150px;
+  margin-right: 100px;
   height: 100%;
   width: 200px;
   position: fixed;
@@ -15,16 +16,16 @@ body {
   padding-top: 20px;
 }
 
-/* .items {
-	margin-left: 350px;
-	background-color: #f7f7fa;
-	width: 100%;
-	margin-right: 50px;
-	margin-top: 50px;
-} */
+/*.items {
+  margin-left: 350px;
+  background-color: #f7f7fa;
+  width: 100%;
+  margin-right: 50px;
+  margin-top: 50px;
+}*/
 
 .container {
-  margin-left: 300px;
+  margin-left: 450px;
   background-color: #f7f7fa;
   width: auto;
   margin-top: 50px;
