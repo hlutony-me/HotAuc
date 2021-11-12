@@ -1,0 +1,2 @@
+MONGO_URI = mongodb+srv://Han:han@cluster0.q9jmp.mongodb.net/comp-231?retryWrites=true&w=majority
+JWT_SECRET = secret
