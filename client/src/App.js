@@ -35,10 +35,10 @@ constructor(){
             <section className="container py-3" style={{ minHeight: '900px' }}>
             <Routes>
               <Route exact path="/" element={<Items />} />
-          <Route exact path="/api/auth/register" element={<Register />} />
-          <Route exact path="/api/auth/login" element={<Login />} />
-        </Routes>
-      </section>
+              <Route exact path="/api/auth/register" element={<Register />} />
+              <Route exact path="/api/auth/login" element={<Login />} />
+            </Routes>
+          </section>
     </Fragment>
   </Router>
   </UserContext.Provider>
