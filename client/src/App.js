@@ -7,23 +7,44 @@ import Register from "./components/auth-component/Register";
 import Login from "./components/auth-component/Login";
 import Sidebar from "./components/Sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { UserContext } from "./components/auth-component/UserContext"
+import { render } from "react-dom";
 
-const App = () => (
-  <Router>
-    <Fragment>
-      <Navbar />
-      <Sidebar />
+class App extends React.Component {
+constructor(){
+  super();
+  this.state = {
+    user: {},
+    token: "",
+    setUserContext: (key, value) => {
+      this.setState({ [key]: value });
+    },
+  };
 
-      <section className="container">
-        <Routes>
-          <Route exact path="/" element={<Items />} />
+  }
 
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
+  render(){
+    return(
+      <>
+        <UserContext.Provider value={this.state}>
+          <Router>
+            <Fragment>
+            <Navbar />
+            <Sidebar />
+
+            <section className="container py-3" style={{ minHeight: '900px' }}>
+            <Routes>
+              <Route exact path="/" element={<Items />} />
+          <Route exact path="/api/auth/register" element={<Register />} />
+          <Route exact path="/api/auth/login" element={<Login />} />
         </Routes>
       </section>
     </Fragment>
   </Router>
-);
+  </UserContext.Provider>
+  </>
+  );
+  }
+}
 
 export default App;

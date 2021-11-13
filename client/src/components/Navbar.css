@@ -19,11 +19,14 @@ main {
 .navbar__title {
   margin-right: auto;
   font-size: 150%;
-  padding: 12px 16px;
+  color: white;
 }
 
 .navbar__item {
   padding: 16px 16px;
   cursor: pointer;
   vertical-align: middle;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: white;
 }
