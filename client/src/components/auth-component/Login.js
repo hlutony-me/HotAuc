@@ -55,6 +55,7 @@ function Login(props) {
 			if(response.status === 200){
 				const data = await response.json();
 				appContext.setUserContext("user",data.user);
+				appContext.setUserContext("token",data.token);
 				navigate('/');
 				
 			}	

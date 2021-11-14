@@ -4,9 +4,13 @@ import { FormGroup } from "react-bootstrap"
 import "./Login.css"
 import { SERVER_URL,LOGIN_INFO_EMPTY_ERROR } from "../../ConstantValue"
 import { Form, Button } from "react-bootstrap"
+import { UserContext } from "./UserContext"
+import { useNavigate } from "react-router-dom";
 
 function Register() {
 
+	const appContext = useContext(UserContext);
+	const navigate = useNavigate();
 	const [RegistUserState, setRegistUserState] = useState({
 		name:"",
 		email:"",
@@ -33,6 +37,7 @@ function Register() {
 	}
 
 	async function register(event){
+		console.log("register");
 		const regUrl = `${SERVER_URL}auth/register`;
 		RegistUserState.name.trim().length ==0 && 
 		setRegistUserErrorState({...RegistUserErrorState, nameError:true});
@@ -45,18 +50,24 @@ function Register() {
 			
 		}
 		else{
-			const response = fetch(regUrl,{
+			const response =await fetch(regUrl,{
 				method:"POST",
 				headers:{"Content-Type":"application/json"},
 				body:JSON.stringify(RegistUserState),
 			});
-			if(response.status === 400){
+			
+			if(response.status!= 200){
 				const {errors} = await response.json();
 				setRegistUserErrorState({...RegistUserErrorState, registErrorMsg:errors[0]["msg"]});
-				console.log(errors[0]["msg"])
 			}
+			if(response.status === 200){
+				const data = await response.json();
+				appContext.setUserContext("user",data.user);
+				appContext.setUserContext("token",data.token);
+				navigate('/');
+				
+			}	
 		}
-		event.preventDefault();
 	}
 
 	return (
