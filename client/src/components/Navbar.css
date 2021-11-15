@@ -1,32 +1,40 @@
 body {
-  margin: 0;
+	margin: 0;
 }
 
 main {
-  margin: 16px;
+	margin: 16px;
 }
 
 .navbar {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 
-  background: black;
-  color: white;
-  font-family: Helvetica;
-  font-weight: 300;
+	background: black;
+	color: white;
+	font-family: Helvetica;
+	font-weight: 300;
 }
 
 .navbar__title {
-  margin-right: auto;
-  font-size: 150%;
-  color: white;
+	margin-right: auto;
+	font-size: 150%;
+	color: white;
 }
 
 .navbar__item {
-  padding: 16px 16px;
-  cursor: pointer;
-  vertical-align: middle;
-  padding: 12px 16px;
-  text-decoration: none;
-  color: white;
+	padding: 16px 16px;
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 12px 16px;
+	text-decoration: none;
+	color: white;
+}
+
+.navbar-container {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	overflow-x: hidden;
+	width: 100%;
 }

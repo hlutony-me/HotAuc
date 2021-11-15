@@ -1,50 +1,56 @@
-import React, { Fragment } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Navbar from "./components/Navbar";
-import Items from "./components/item-component/Items";
-import Register from "./components/auth-component/Register";
-import Login from "./components/auth-component/Login";
-import Sidebar from "./components/Sidebar";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Fragment } from "react"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import "./App.css"
+import Navbar from "./components/Navbar"
+import Items from "./components/item-component/Items"
+import Register from "./components/auth-component/Register"
+import Login from "./components/auth-component/Login"
+import Sidebar from "./components/Sidebar"
+import "bootstrap/dist/css/bootstrap.min.css"
 import { UserContext } from "./components/auth-component/UserContext"
-import { render } from "react-dom";
+import { render } from "react-dom"
 
 class App extends React.Component {
-constructor(){
-  super();
-  this.state = {
-    user: {},
-    token: "",
-    setUserContext: (key, value) => {
-      this.setState({ [key]: value });
-    },
-  };
+	constructor() {
+		super()
+		this.state = {
+			user: {},
+			token: "",
+			setUserContext: (key, value) => {
+				this.setState({ [key]: value })
+			}
+		}
+	}
 
-  }
+	render() {
+		return (
+			<>
+				<UserContext.Provider value={this.state}>
+					<Router>
+						<Fragment>
+							<Navbar />
+							<Sidebar className="sidebar" />
 
-  render(){
-    return(
-      <>
-        <UserContext.Provider value={this.state}>
-          <Router>
-            <Fragment>
-            <Navbar />
-            <Sidebar />
-
-            <section className="container py-3" style={{ minHeight: '900px' }}>
-            <Routes>
-              <Route exact path="/" element={<Items />} />
-              <Route exact path="/api/auth/register" element={<Register />} />
-              <Route exact path="/api/auth/login" element={<Login />} />
-            </Routes>
-          </section>
-    </Fragment>
-  </Router>
-  </UserContext.Provider>
-  </>
-  );
-  }
+							<section
+								className="right-container"
+								style={{ minHeight: "900px" }}
+							>
+								<Routes>
+									<Route exact path="/" element={<Items />} />
+									<Route
+										exact
+										path="/api/auth/register"
+										element={<Register />}
+									/>
+									<Route exact path="/api/auth/login" element={<Login />} />
+								</Routes>
+							</section>
+						</Fragment>
+					</Router>
+				</UserContext.Provider>
+			</>
+		)
+	}
 }
 
-export default App;
+export default App
