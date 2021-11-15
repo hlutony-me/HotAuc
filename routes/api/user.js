@@ -3,6 +3,8 @@ const router = express.Router()
 //Middleware
 const auth = require("../../middleware/auth")
 
+const User  = require('../../models/user')
+
 //@route   GET api/user
 //@desc    Test route
 //@access  Public
