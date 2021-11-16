@@ -19,17 +19,20 @@ const Option = (props) => {
   };
 
 
-  export const colourOptions = [
-	{ value: "ocean1", label: "Ocean" },
-	{ value: "blue", label: "Blue" },
-	{ value: "purple", label: "Purple" },
-	{ value: "red", label: "Red" },
-	{ value: "orange", label: "Orange" },
-	{ value: "yellow", label: "Yellow" },
-	{ value: "green", label: "Green" },
-	{ value: "forest", label: "Forest" },
-	{ value: "slate", label: "Slate" },
+  export const brandOptions = [
+	{ value: "mazda", label: "mazda" },
+	{ value: "ford", label: "Ford" },
+	{ value: "porsche", label: "Porsche" },
+	{ value: "BMW", label: "BMW" },
 	{ value: "silver", label: "Silver" }
+  ];
+
+  export const yearOptions = [
+	{ value: "1954", label: "1954" },
+	{ value: "2000", label: "2000" },
+	{ value: "2010", label: "2010" },
+	{ value: "2012", label: "2012" },
+	{ value: "2016", label: "2016" }
   ];
 
   const handleChange = (selected) => {
@@ -44,7 +47,7 @@ function Sidebar() {
 	<div className="sidebar">
 		
 <Select
-  options={colourOptions}
+  options={brandOptions}
   isMulti
   closeMenuOnSelect={false}
   hideSelectedOptions={false}
@@ -58,7 +61,7 @@ function Sidebar() {
 />
 
 <Select
-  options={colourOptions}
+  options={yearOptions}
   isMulti
   closeMenuOnSelect={false}
   hideSelectedOptions={false}
