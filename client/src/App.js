@@ -9,6 +9,7 @@ import Sidebar from "./components/Sidebar"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { UserContext } from "./components/auth-component/UserContext"
 import { render } from "react-dom"
+import Footer from "./components/Footer"
 
 class App extends React.Component {
 	constructor() {
@@ -45,6 +46,7 @@ class App extends React.Component {
 									<Route exact path="/api/auth/login" element={<Login />} />
 								</Routes>
 							</section>
+							<Footer />
 						</Fragment>
 					</Router>
 				</UserContext.Provider>

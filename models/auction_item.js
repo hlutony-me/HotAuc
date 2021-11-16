@@ -61,6 +61,6 @@ const AuctionItemSchema = new mongoose.Schema({
 	}
 })
 
-const User = mongoose.model("user", UserSchema)
+const AuctionItem = mongoose.model("auction-item", AuctionItemSchema)
 
-module.exports = User
+module.exports = AuctionItem
