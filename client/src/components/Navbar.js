@@ -67,7 +67,7 @@ const NavBar = () => {
         <Link to="/api/auth/register" className="navbar__item">
           Register
         </Link>
-        <Link to="/" className="navbar__item">
+        <Link onClick={()=>{window.scrollTo(0,document.body.scrollHeight)}} to="/#bottom" className="navbar__item">
           Contact Us
         </Link>
       </header>
