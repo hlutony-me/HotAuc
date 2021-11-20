@@ -2,6 +2,7 @@ const express = require("express")
 const connectDB = require("./config/db")
 const swaggerUi = require("swagger-ui-express")
 const swaggerDocument = require("./swagger.json")
+const cors = require('cors')
 
 const app = express()
 
@@ -10,6 +11,9 @@ connectDB()
 
 //Init middleware
 app.use(express.json({ extended: false }))
+
+//Using cors to connect to local api
+app.use(cors());
 
 app.get("/", (req, res) => {
 	res.send("API running")
