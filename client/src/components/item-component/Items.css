@@ -27,15 +27,16 @@ h5 {
 .cards {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: left;
 }
 
 .card {
   background: #fff;
-  width: 24em;
+  width: auto;
+  height: auto;
   border-radius: 0.6em;
   margin: 1em;
-  margin-left: 100px;
+  margin-left: 45px;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 13px 27px -5px hsla(240, 30.1%, 28%, 0.25),
@@ -51,7 +52,8 @@ h5 {
 }
 
 .card img {
-  width: 100%;
+  width: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
