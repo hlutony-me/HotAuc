@@ -1,3 +1,7 @@
-.footer-container{
-    width:100%;
+.footer-container {
+	width: 100%;
+	background-color: #f7f7fa;
+	text-align: center;
+	padding: 10px;
+	margin-top: 15px;
 }

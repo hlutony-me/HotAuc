@@ -3,10 +3,10 @@ import './Footer.css'
 
 function Footer() {
     return (
-        <div className="footer-container">
-            HotAuc:HotAuc@gmail.com
-        </div>
-    )
+			<div className="footer-container" id="footer">
+				Customer Service: HotAuc@gmail.com
+			</div>
+		)
 }
 
 export default Footer

@@ -1,96 +1,185 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./Navbar.css";
-import { useContext } from "react";
-import { UserContext } from "./auth-component/UserContext";
-import { useNavigate } from "react-router-dom";
+import React, { useState, Fragment } from "react"
+import { Link } from "react-router-dom"
+import "./Navbar.css"
+import { useContext } from "react"
+import { UserContext } from "./auth-component/UserContext"
+import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { setSearchResult } from "../redux/features/itemSlice"
+import axios from "axios"
 
 const NavBar = () => {
-  const value = useContext(UserContext);
-  if (value.user["email"]) {
-    return (
-      <header className="navbar">
-        <Link to="/" className="navbar__title navbar__item">
-          HotAuc
-        </Link>
-        <form action="/" method="get">
-          <label htmlFor="header-search">
-            <span className="visually-hidden">Search Items</span>
-          </label>
-          <input
-            type="text"
-            id="header-search"
-            placeholder="Search items"
-            name="s"
-          />
-          <button type="submit">Search</button>
-        </form>
-        <Link to="/" className="navbar__item">
-          Home
-        </Link>
-        <div to="" className="navbar__item">
-          Hello, {value.user["email"]}{" "}
-        </div>
-        <Link to="/" className="navbar__item">
-          Contact Us
-        </Link>
-        <Link to="/" className="navbar__item" onClick="Logout">
-          Logout
-        </Link>
-      </header>
-    );
-  } else {
-    return (
-      <header className="navbar">
-        <Link to="/" className="navbar__title navbar__item">
-          HotAuc
-        </Link>
-        <form action="/" method="get">
-          <label htmlFor="header-search">
-            <span className="visually-hidden">Search Items</span>
-          </label>
-          <input
-            type="text"
-            id="header-search"
-            placeholder="Search Items"
-            name="s"
-          />
-          <button type="submit">Search</button>
-        </form>
-        <Link to="/" className="navbar__item">
-          Home
-        </Link>
+	const value = useContext(UserContext)
 
-        <Link to="/api/auth/login" className="navbar__item">
-          Login
-        </Link>
-        <Link to="/api/auth/register" className="navbar__item">
-          Register
-        </Link>
-        <Link onClick={()=>{window.scrollTo(0,document.body.scrollHeight)}} to="/#bottom" className="navbar__item">
-          Contact Us
-        </Link>
-      </header>
-    );
-  }
-};
+	const [searchCondition, setSearchCondition] = useState("")
 
-const Logout = () => {
-  const navigate = useNavigate();
-  const appContext = useContext(UserContext);
-  appContext.setUserContext({
-    user: {},
-    token: "",
-  });
-  navigate("/");
-};
+	const items = useSelector((state) => state.item.value)
+	//Set dispatch for Redux
+	const dispatch = useDispatch()
 
-function Navbar1() {
-  return (
-    <div className="navbar-container">
-      <NavBar />
-    </div>
-  );
+	const onSearchConditionChange = (e) => {
+		setSearchCondition(e.target.value)
+	}
+
+	const handleSearch = async (e) => {
+		e.preventDefault()
+
+		try {
+			//Set request header
+			const config = {
+				headers: {
+					"Content-Type": "Application/json"
+				}
+			}
+
+			const res = await axios.get(
+				"/api/item/search",
+				{ params: { title: searchCondition } },
+				config
+			)
+			dispatch(setSearchResult(res.data))
+		} catch (error) {}
+	}
+
+	const guestLink = (
+		<>
+			<Link to="/api/auth/login" className="navbar__item">
+				Login
+			</Link>
+			<Link to="/api/auth/register" className="navbar__item">
+				Register
+			</Link>
+		</>
+	)
+
+	const authLink = (
+		<>
+			<Link to="/" className="navbar__item" onClick="Logout">
+				Logout
+			</Link>
+			<div to="" className="navbar__item">
+				// Hello, {value.user["email"]} //{" "}
+			</div>
+		</>
+	)
+
+	//   if (value.user["email"]) {
+	//     return (
+	// 			<header className="navbar">
+	// 				<Link to="/" className="navbar__title navbar__item">
+	// 					HotAuc
+	// 				</Link>
+	// 				<form onSubmit={(e) => handleSerch(e)}>
+	// 					<label htmlFor="header-search">
+	// 						<span className="visually-hidden">Search Items</span>
+	// 					</label>
+	// 					<input
+	// 						type="text"
+	// 						id="header-search"
+	// 						placeholder="Search items"
+	//             name="s"
+	//             value={searchCondition}
+	// 						onChange={(e) => onSearchConditionChange(e)}
+	// 					/>
+	// 					<button type="submit">Search</button>
+	// 				</form>
+	// 				<Link to="/" className="navbar__item">
+	// 					Home
+	// 				</Link>
+	// 				<div to="" className="navbar__item">
+	// 					Hello, {value.user["email"]}{" "}
+	// 				</div>
+	// 				<Link to="/" className="navbar__item">
+	// 					Contact Us
+	// 				</Link>
+	// 				<Link to="/" className="navbar__item" onClick={e=>logout()}>
+	// 					Logout
+	// 				</Link>
+	// 			</header>
+	// 		)
+	//   } else {
+	//     return (
+	//       <header className="navbar">
+	//         <Link to="/" className="navbar__title navbar__item">
+	//           HotAuc
+	//         </Link>
+	//         <form action="/" method="get">
+	//           <label htmlFor="header-search">
+	//             <span className="visually-hidden">Search Items</span>
+	//           </label>
+	//           <input
+	//             type="text"
+	//             id="header-search"
+	//             placeholder="Search Items"
+	//             name="s"
+	//           />
+	//           <button type="submit">Search</button>
+	//         </form>
+	//         <Link to="/" className="navbar__item">
+	//           Home
+	//         </Link>
+
+	//         <Link to="/api/auth/login" className="navbar__item">
+	//           Login
+	//         </Link>
+	//         <Link to="/api/auth/register" className="navbar__item">
+	//           Register
+	//         </Link>
+	//         <Link onClick={()=>{window.scrollTo(0,document.body.scrollHeight)}} to="/#bottom" className="navbar__item">
+	//           Contact Us
+	//         </Link>
+	//       </header>
+	//     );
+	//   }
+	// };
+
+	// const logout = () => {
+	//   const navigate = useNavigate();
+	//   const appContext = useContext(UserContext);
+	//   appContext.setUserContext({
+	//     user: {},
+	//     token: "",
+	//   });
+	//   navigate("/");
+	// };
+
+	// function Navbar1() {
+	//   return (
+	//     <div className="navbar-container">
+	//       <NavBar />
+	//     </div>
+	//   );
+	// }
+
+	return (
+		<header className="navbar">
+			<Link to="/" className="navbar__title navbar__item">
+				HotAuc
+			</Link>
+			<form onSubmit={(e) => handleSearch(e)}>
+				<label htmlFor="header-search">
+					<span className="visually-hidden">Search Items</span>
+				</label>
+				<input
+					type="text"
+					id="header-search"
+					placeholder="Search items"
+					name="s"
+					value={searchCondition}
+					onChange={(e) => onSearchConditionChange(e)}
+				/>
+				<button type="submit">Search</button>
+			</form>
+			<Link to="/" className="navbar__item">
+				Home
+			</Link>
+
+			<a href="#footer" className="navbar__item">
+				Contact Us
+			</a>
+			{<Fragment>{value.user["email"] ? authLink : guestLink}</Fragment>}
+		</header>
+	)
 }
 
-export default Navbar1;
+export default NavBar
