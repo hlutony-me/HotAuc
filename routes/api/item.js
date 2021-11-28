@@ -54,4 +54,37 @@ router.get("/:id", async (req, res) => {
 		res.status(500).json({ msg: "Auction Item search error - id" })
 	}
 })
+
+//@route   Post api/item/
+//@desc    Test route
+//@access  Public
+router.post('/',async (req, res) => {    
+    const item = new AuctionItem(req.body);
+    await item.save().then((item) => {
+        res.status(201).send(item);
+    }).catch((error) => {
+        res.status(400).send(error);
+    })    
+})
+
+//@route   Put api/item/{id}
+//@desc    Test route
+//@access  Public
+router.put('/:id', function(req, res, next) {
+	AuctionItem.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+	  if (err) return next(err);
+	  res.json(post);
+	});
+  });
+
+//@route   Delete api/item/{id}
+//@desc    Test route
+//@access  Public
+router.delete('/:id', function(req, res, next) {
+	AuctionItem.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+	  if (err) return next(err);
+	  res.json(post);
+	});
+  });
+
 module.exports = router
