@@ -40,6 +40,21 @@ router.get("/search", async (req, res) => {
 	}
 })
 
+//@route   GET api/item/userid
+//@desc    Test route
+//@access  Public
+router.get("/userid/:id", async (req, res) => {
+	var userId = req.params.id
+	try {
+		const items = await AuctionItem.find({ "bids.bidder": { $in: [userId] } })
+		res.json(items)
+		//res.json({message: "Hello id " + title});
+	} catch (err) {
+		console.log(err.message)
+		res.status(500).json({ msg: "Auction Item search error - items by userid:" + err.message })
+	}
+})
+
 //@route   GET api/item/id
 //@desc    Test route
 //@access  Public
