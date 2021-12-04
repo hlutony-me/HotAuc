@@ -23,7 +23,7 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
     'users/register',
-    async (RegistUserState) => {
+    async (RegistUserState, thunkAPI) => {
         const response = await axios.post(`${SERVER_URL}auth/register`, RegistUserState, {
             headers: {
                 "Content-Type": "Application/json"
@@ -31,6 +31,11 @@ export const register = createAsyncThunk(
         }).catch(error => {
             return error.response;
         });
+
+        if(response.status !== 200){
+            return thunkAPI.rejectWithValue(response);
+        }
+
         return response
     }
 )

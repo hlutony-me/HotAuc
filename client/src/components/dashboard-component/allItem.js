@@ -1,12 +1,13 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import "./Items.css"
 import axios from "axios"
 import { setSearchResult } from "../../redux/features/dashboardItemsSlice"
+import "../item-component/Items.css"
+import {SERVER_URL} from "../../ConstantValue"
 
 const Items = () => {
-	const items = useSelector((state) => state.item.value)
-	const userId = useSelector((state) => state.user.id)
+	const items = useSelector((state) => state.dashboardItem.value)
+	const userId = useSelector((state) => state.userInfor.user._id)
 	//Set dispatch for Redux
 	const dispatch = useDispatch()
 
@@ -21,7 +22,7 @@ const Items = () => {
 					}
 				}
 
-				const res = await axios.get(`api/item/${userId}`, config)
+				const res = await axios.get(`${SERVER_URL}item/${userId}`, config)
 				console.log(res)
 
 				dispatch(setSearchResult(res.data))
@@ -35,7 +36,7 @@ const Items = () => {
 
 	return (
 		<div className="cards">
-			{items.map((item) => {
+			{items?.map((item) => {
 				return (
 					<div className="card">
 						<div className="card-body">

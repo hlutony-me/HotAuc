@@ -1,15 +1,13 @@
 import React, { useState, Fragment } from "react"
 import { Link } from "react-router-dom"
 import "./Navbar.css"
-import { useContext } from "react"
-import { UserContext } from "./auth-component/UserContext"
-import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { setSearchResult } from "../redux/features/itemSlice"
 import axios from "axios"
 
 const NavBar = () => {
-	const value = useContext(UserContext)
+	// const value = useContext(UserContext)
+	const value = useSelector(state => state.userInfor.user?.email)
 
 	const [searchCondition, setSearchCondition] = useState("")
 
@@ -57,9 +55,9 @@ const NavBar = () => {
 			<Link to="/" className="navbar__item" onClick="Logout">
 				Logout
 			</Link>
-			<div to="" className="navbar__item">
-				// Hello, {value.user["email"]} //{" "}
-			</div>
+			<Link to="/dashboard-allItem" className="navbar__item">
+				// Hello, {value} //{" "}
+			</Link>
 		</>
 	)
 
@@ -177,7 +175,7 @@ const NavBar = () => {
 			<a href="#footer" className="navbar__item">
 				Contact Us
 			</a>
-			{<Fragment>{value.user["email"] ? authLink : guestLink}</Fragment>}
+			{<Fragment>{value ? authLink : guestLink}</Fragment>}
 		</header>
 	)
 }

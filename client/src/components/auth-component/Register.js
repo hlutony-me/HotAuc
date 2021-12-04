@@ -2,9 +2,7 @@ import "./Register.css"
 import React, { useContext, useEffect, useState } from "react"
 import { FormGroup } from "react-bootstrap"
 import "./Login.css"
-import { SERVER_URL, LOGIN_INFO_EMPTY_ERROR } from "../../ConstantValue"
 import { Form, Button } from "react-bootstrap"
-import { UserContext } from "./UserContext"
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { register } from "../../redux/features/userInforSlice"
@@ -15,7 +13,6 @@ function Register() {
 	const dispatch = useDispatch();
 	const registErrorMsg = errors[0]?.msg;
 
-	const appContext = useContext(UserContext);
 	const navigate = useNavigate();
 	const [RegistUserState, setRegistUserState] = useState({
 		name: "",
@@ -42,7 +39,7 @@ function Register() {
 	}
 
 	useEffect(() => {
-		if (token && errors.length === 0) {
+		if (!!token && errors.length === 0) {
 			navigate('/');
 		}
 
@@ -50,7 +47,6 @@ function Register() {
 
 	return (
 		<>
-
 			<div className="card mx-auto">
 				<Form className="m-3">
 					<Form.Group className="mb-3" controlId="formBasicname">
@@ -70,10 +66,7 @@ function Register() {
 						<Form.Control type="password" placeholder="Password" value={RegistUserState.password} onChange={passwordOnChangeHandler} />
 					</Form.Group>
 					<Form.Group className="d-flex">
-						{/* <Button variant="primary" type="button" onClick={register}>
-    Submit
-  </Button> */}
-						<Button variant="primary" type="button" onClick={dispatch(register())}>
+						<Button variant="primary" type="button" onClick={()=>dispatch(register(RegistUserState))}>
 							Submit
 						</Button>
 						<Form.Text className="mx-3 text-danger">

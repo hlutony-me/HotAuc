@@ -6,6 +6,7 @@ import Items from "./components/item-component/Items"
 import Register from "./components/auth-component/Register"
 import Login from "./components/auth-component/Login"
 import Sidebar from "./components/Sidebar"
+import DashboardAllItems from "./components/dashboard-component/allItem"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { UserContext } from "./components/auth-component/UserContext"
 import { render } from "react-dom"
@@ -46,6 +47,7 @@ class App extends React.Component {
 										element={<Register />}
 									/>
 									<Route exact path="/login" element={<Login />} />
+									<Route exact path="/dashboard-allItem" element={<DashboardAllItems />} />
 								</Routes>
 							</section>
 							<Footer />
