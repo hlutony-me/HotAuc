@@ -48,9 +48,10 @@ class App extends React.Component {
 									<Route path="/dashboard" element={<Dashboard />} />
 									<Route
 										exact
-										path="/api/auth/register"
+										path="/register"
 										element={<Register />}
 									/>
+
 									<Route
 										path="dashboard/profile/edit"
 										element={<EditProfile />}
@@ -58,7 +59,8 @@ class App extends React.Component {
 									<Route path="dashboard/bid/edit" element={<EditBid />} />
 									<Route path="/item/:id" element={<Item />} />
 
-									<Route exact path="/api/auth/login" element={<Login />} />
+									<Route exact path="/login" element={<Login />} />
+
 								</Routes>
 							</section>
 							<Footer />
