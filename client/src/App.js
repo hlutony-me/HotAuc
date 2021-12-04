@@ -29,7 +29,6 @@ class App extends React.Component {
 	render() {
 		return (
 			<Provider store={store}>
-				<UserContext.Provider value={this.state}>
 					<Router>
 						<Fragment>
 							<Navbar />
@@ -53,7 +52,6 @@ class App extends React.Component {
 							<Footer />
 						</Fragment>
 					</Router>
-				</UserContext.Provider>
 			</Provider>
 		)
 	}
