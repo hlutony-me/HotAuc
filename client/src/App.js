@@ -6,10 +6,7 @@ import Items from "./components/item-component/Items"
 import Register from "./components/auth-component/Register"
 import Login from "./components/auth-component/Login"
 import Sidebar from "./components/Sidebar"
-import DashboardAllItems from "./components/dashboard-component/allItem"
 import "bootstrap/dist/css/bootstrap.min.css"
-import { UserContext } from "./components/auth-component/UserContext"
-import { render } from "react-dom"
 import Footer from "./components/Footer"
 import { Provider } from "react-redux"
 import store from "./redux/store"
@@ -48,13 +45,9 @@ class App extends React.Component {
 									<Route path="/dashboard" element={<Dashboard />} />
 									<Route
 										exact
-										path="/register"
+										path="/api/auth/register"
 										element={<Register />}
 									/>
-<<<<<<< HEAD
-									<Route exact path="/login" element={<Login />} />
-									<Route exact path="/dashboard-allItem" element={<DashboardAllItems />} />
-=======
 									<Route
 										path="dashboard/profile/edit"
 										element={<EditProfile />}
@@ -63,7 +56,6 @@ class App extends React.Component {
 									<Route path="/item/:id" element={<Item />} />
 
 									<Route exact path="/api/auth/login" element={<Login />} />
->>>>>>> master
 								</Routes>
 							</section>
 							<Footer />

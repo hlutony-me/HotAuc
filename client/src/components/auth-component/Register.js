@@ -1,9 +1,8 @@
 import "./Register.css"
-import React, { useContext, useEffect, useState } from "react"
-import { FormGroup } from "react-bootstrap"
+import React, {useEffect, useState } from "react"
 import "./Login.css"
 import { Form, Button } from "react-bootstrap"
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { register } from "../../redux/features/userInforSlice"
 
@@ -23,6 +22,7 @@ function Register() {
 		nameError: true,
 		emailError: true,
 		passwordError: true,
+		registErrorMsg: "",
 	});
 
 	function nameOnChangeHandler(e) {
@@ -42,8 +42,7 @@ function Register() {
 		if (!!token && errors.length === 0) {
 			navigate('/');
 		}
-
-	}, [token, errors])
+	},[token,errors])
 
 	return (
 		<>
@@ -66,7 +65,7 @@ function Register() {
 						<Form.Control type="password" placeholder="Password" value={RegistUserState.password} onChange={passwordOnChangeHandler} />
 					</Form.Group>
 					<Form.Group className="d-flex">
-						<Button variant="primary" type="button" onClick={()=>dispatch(register(RegistUserState))}>
+						<Button variant="primary" type="button" onClick={() => dispatch(register(RegistUserState))}>
 							Submit
 						</Button>
 						<Form.Text className="mx-3 text-danger">

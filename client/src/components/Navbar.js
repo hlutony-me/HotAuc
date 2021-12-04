@@ -41,10 +41,10 @@ const NavBar = () => {
 
 	const guestLink = (
 		<>
-			<Link to="/login" className="navbar__item">
+			<Link to="/api/auth/login" className="navbar__item">
 				Login
 			</Link>
-			<Link to="/register" className="navbar__item">
+			<Link to="/api/auth/register" className="navbar__item">
 				Register
 			</Link>
 		</>
@@ -55,13 +55,9 @@ const NavBar = () => {
 			<Link to="/" className="navbar__item" onClick="Logout">
 				Logout
 			</Link>
-<<<<<<< HEAD
-			<Link to="/dashboard-allItem" className="navbar__item">
-				// Hello, {value} //{" "}
-=======
+
 			<Link to="/dashboard" className="navbar__item">
-				Hello, {value.user["email"]}
->>>>>>> master
+				Hello, {value}
 			</Link>
 		</>
 	)
