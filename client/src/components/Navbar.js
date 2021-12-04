@@ -55,8 +55,13 @@ const NavBar = () => {
 			<Link to="/" className="navbar__item" onClick="Logout">
 				Logout
 			</Link>
+<<<<<<< HEAD
 			<Link to="/dashboard-allItem" className="navbar__item">
 				// Hello, {value} //{" "}
+=======
+			<Link to="/dashboard" className="navbar__item">
+				Hello, {value.user["email"]}
+>>>>>>> master
 			</Link>
 		</>
 	)

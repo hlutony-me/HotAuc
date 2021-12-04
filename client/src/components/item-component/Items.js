@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import "./Items.css"
 import axios from "axios"
 import { setSearchResult } from "../../redux/features/itemSlice"
+import { Link } from "react-router-dom"
 
 const Items = () => {
 	const items = useSelector((state) => state.item.value)
@@ -36,17 +37,18 @@ const Items = () => {
 			{items.map((item) => {
 				return (
 					<div className="card">
-						<div className="card-body">
-							{item.images.map((prop) => (
-								<img src={prop.uri} alt="hotwheels image" />
-							))}
-							<p> </p>
-							<h2>{item.title}</h2>
-							<p>Color: {item.color}</p>
-							<p>Description: {item.description}</p>
-							<p>Year: {item.year}</p>
-							<p>End Time: {item.endTime}</p>
-						</div>
+						<Link to={`/item/${item._id}`} className="no-decoration">
+							<div className="card-body">
+								<img src={item.images[0].uri} />
+
+								<p> </p>
+								<h2>{item.title}</h2>
+								<p>Color: {item.color}</p>
+								<p>Description: {item.description}</p>
+								<p>Year: {item.year}</p>
+								<p>End Time: {item.endTime}</p>
+							</div>
+						</Link>
 					</div>
 				)
 			})}
@@ -54,19 +56,3 @@ const Items = () => {
 	)
 }
 export default Items
-
-const Item = (props) => (
-	<div className="card">
-		<div className="card-body">
-			{props.item.images.map((prop) => (
-				<img src={prop.uri} alt="hotwheels image" />
-			))}
-			<p> </p>
-			<h2>{props.item.title}</h2>
-			<p>Color: {props.item.color}</p>
-			<p>Description: {props.item.description}</p>
-			<p>Year: {props.item.year}</p>
-			<p>End Time: {props.item.endTime}</p>
-		</div>
-	</div>
-)
