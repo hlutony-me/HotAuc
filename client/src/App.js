@@ -42,10 +42,10 @@ class App extends React.Component {
 									<Route exact path="/" element={<Items />} />
 									<Route
 										exact
-										path="/api/auth/register"
+										path="/register"
 										element={<Register />}
 									/>
-									<Route exact path="/api/auth/login" element={<Login />} />
+									<Route exact path="/login" element={<Login />} />
 								</Routes>
 							</section>
 							<Footer />

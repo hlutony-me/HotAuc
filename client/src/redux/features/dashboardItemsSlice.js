@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 
-const itemSlice = createSlice({
-	name: "item",
+const dashbordItemslice = createSlice({
+	name: "dashbordUserItem",
 	initialState: {
 		value: []
 	},
@@ -14,5 +14,5 @@ const itemSlice = createSlice({
 })
 
 
-export const { setSearchResult } = itemSlice.actions
-export default itemSlice.reducer
+export const { setSearchResult } = dashbordItemslice.actions
+export default dashbordItemslice.reducer
