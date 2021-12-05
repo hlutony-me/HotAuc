@@ -7,8 +7,6 @@ import Register from "./components/auth-component/Register"
 import Login from "./components/auth-component/Login"
 import Sidebar from "./components/Sidebar"
 import "bootstrap/dist/css/bootstrap.min.css"
-import { UserContext } from "./components/auth-component/UserContext"
-import { render } from "react-dom"
 import Footer from "./components/Footer"
 import { Provider } from "react-redux"
 import store from "./redux/store"
@@ -33,7 +31,6 @@ class App extends React.Component {
 	render() {
 		return (
 			<Provider store={store}>
-				<UserContext.Provider value={this.state}>
 					<Router>
 						<Fragment>
 							<Navbar />
@@ -64,7 +61,6 @@ class App extends React.Component {
 							<Footer />
 						</Fragment>
 					</Router>
-				</UserContext.Provider>
 			</Provider>
 		)
 	}

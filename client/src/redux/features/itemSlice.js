@@ -13,5 +13,6 @@ const itemSlice = createSlice({
 	}
 })
 
+
 export const { setSearchResult } = itemSlice.actions
 export default itemSlice.reducer
