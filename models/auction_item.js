@@ -5,6 +5,10 @@ const AuctionItemSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	seller: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "user"
+	},
 	description: {
 		type: String,
 		required: true
