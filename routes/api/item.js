@@ -19,7 +19,7 @@ router.get("/all", async (req, res) => {
 	}
 })
 
-//@route   GET api/item/search
+//@route   GET api/item/search?title=
 //@desc    Test route
 //@access  Public
 router.get("/search", async (req, res) => {
@@ -33,29 +33,27 @@ router.get("/search", async (req, res) => {
 			title: { $regex: new RegExp(title), $options: "i" }
 		})
 		res.json(items)
-		//res.json({message: "Hello id " + title});
 	} catch (err) {
 		console.log(err.message)
 		res.status(500).json({ msg: "Auction Item search error - search title" })
 	}
 })
 
-//@route   GET api/item/userid
+//@route   GET api/item/userid/{id}
 //@desc    Test route
 //@access  Public
 router.get("/userid/:id", async (req, res) => {
 	var userId = req.params.id
 	try {
-		const items = await AuctionItem.find({ "bids.bidder": { $in: [userId] } })
+		const items = await AuctionItem.find({ "seller": { $in: [userId] } })
 		res.json(items)
-		//res.json({message: "Hello id " + title});
 	} catch (err) {
 		console.log(err.message)
 		res.status(500).json({ msg: "Auction Item search error - items by userid:" + err.message })
 	}
 })
 
-//@route   GET api/item/id
+//@route   GET api/item/{id}
 //@desc    Test route
 //@access  Public
 router.get("/:id", async (req, res) => {
@@ -63,7 +61,6 @@ router.get("/:id", async (req, res) => {
 	try {
 		const item = await AuctionItem.findById(id)
 		res.json(item)
-		//res.json({message: "Hello id " + id});
 	} catch (err) {
 		console.log(err.message)
 		res.status(500).json({ msg: "Auction Item search error - id" })
