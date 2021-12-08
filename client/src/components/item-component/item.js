@@ -74,7 +74,7 @@ const Item = () => {
             alt="Random Img"
           />
           <p class="text">
-            Current Price: ${!loading && data.stratingPrice.$numberDecimal}
+            Current Price: ${!loading && data.startingPrice}
           </p>
           <p class="text">End Time: {!loading && data.endTime}</p>
           <div class="bid">
