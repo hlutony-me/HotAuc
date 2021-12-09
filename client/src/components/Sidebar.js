@@ -3,6 +3,7 @@ import "./Sidebar.css"
 import { components } from "react-select";
 import Select from 'react-select';
 
+
 const Option = (props) => {
 	return (
 	  <div>
