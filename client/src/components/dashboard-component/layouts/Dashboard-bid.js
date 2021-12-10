@@ -46,6 +46,9 @@ function DashboardBid() {
 							<p>Color: {item.color}</p>
 							<p>Description: {item.description}</p>
 							<p>Year: {item.year}</p>
+							<p>My Price: {item.startingPrice}</p>
+							<br/>
+							<p>Current Price: {item.startingPrice}</p>
 							<p>End Time: {item.endTime}</p>
 						</div>
 					</div>
