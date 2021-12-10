@@ -45,11 +45,15 @@ router.get("/search", async (req, res) => {
 router.get("/userid/:id", async (req, res) => {
 	var userId = req.params.id
 	try {
-		const items = await AuctionItem.find({ "seller": { $in: [userId] } })
+		const items = await AuctionItem.find({ seller: { $in: [userId] } })
 		res.json(items)
 	} catch (err) {
 		console.log(err.message)
-		res.status(500).json({ msg: "Auction Item search error - items by userid:" + err.message })
+		res
+			.status(500)
+			.json({
+				msg: "Auction Item search error - items by userid:" + err.message
+			})
 	}
 })
 
@@ -70,33 +74,36 @@ router.get("/:id", async (req, res) => {
 //@route   Post api/item/
 //@desc    Test route
 //@access  Public
-router.post('/',async (req, res) => {    
-    const item = new AuctionItem(req.body);
-    await item.save().then((item) => {
-        res.status(201).send(item);
-    }).catch((error) => {
-        res.status(400).send(error);
-    })    
+router.post("/", async (req, res) => {
+	const item = new AuctionItem(req.body)
+	await item
+		.save()
+		.then((item) => {
+			res.status(200).send(item)
+		})
+		.catch((error) => {
+			res.status(400).send(error)
+		})
 })
 
 //@route   Put api/item/{id}
 //@desc    Test route
 //@access  Public
-router.put('/:id', function(req, res, next) {
+router.put("/:id", function (req, res, next) {
 	AuctionItem.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
-	  if (err) return next(err);
-	  res.json(post);
-	});
-  });
+		if (err) return next(err)
+		res.json(post)
+	})
+})
 
 //@route   Delete api/item/{id}
 //@desc    Test route
 //@access  Public
-router.delete('/:id', function(req, res, next) {
+router.delete("/:id", function (req, res, next) {
 	AuctionItem.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-	  if (err) return next(err);
-	  res.json(post);
-	});
-  });
+		if (err) return next(err)
+		res.json(post)
+	})
+})
 
 module.exports = router

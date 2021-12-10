@@ -1,13 +1,21 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import ImageUpload from "./image-upload"
+import { Button, ButtonGroup } from "react-bootstrap"
+import "./edit-bid.css"
 
 function EditBid() {
 	return (
-		<div className="edit-bid">
-			edit bid
-            <Link to="/dashboard">go back to dash board</Link>
- 
-		</div>
+		<>
+			<Button variant="primary">
+				<Link to="/dashboard" className="btn-back">
+					go back to dash board
+				</Link>
+			</Button>
+			<div className="edit-bid">
+				<ImageUpload></ImageUpload>
+			</div>
+		</>
 	)
 }
 

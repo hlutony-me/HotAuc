@@ -1,0 +1,11 @@
+.edit-bid {
+	margin: 50px;
+}
+
+.btn-back {
+	text-decoration: none;
+	color: white;
+}
+.btn-back:hover{
+    color: white;
+}
