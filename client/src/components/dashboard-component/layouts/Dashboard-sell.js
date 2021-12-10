@@ -1,33 +1,37 @@
-import React, {useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { setSearchResult, setResultError } from "../../../redux/features/dashboardItemsSlice"
+import {
+	setSearchResult,
+	setResultError
+} from "../../../redux/features/dashboardItemsSlice"
+import { Link } from "react-router-dom"
 import axios from "axios"
 
 function DashboardSell() {
-    const items = useSelector((state) => state.dashboardItem.value)
+	const items = useSelector((state) => state.dashboardItem.value)
 	const userId = useSelector((state) => state.userInfor.user._id)
 	//Set dispatch for Redux
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		const fetchItems = async () => {
-				console.log("called")
-				//Set request header
-				const config = {
-					headers: {
-						"Content-Type": "Application/json"
-					}
+			console.log("called")
+			//Set request header
+			const config = {
+				headers: {
+					"Content-Type": "Application/json"
 				}
+			}
 
-				const res = await axios.get(`api/userid/${userId}`, config)
-                .catch(error => dispatch(setResultError("not found")));
+			const res = await axios
+				.get(`api/userid/${userId}`, config)
+				.catch((error) => dispatch(setResultError("not found")))
 
-                  dispatch(setSearchResult(res))
-                
+			dispatch(setSearchResult(res))
 		}
 
 		fetchItems()
-        console.log("items",items)
+		console.log("items", items)
 	}, [dispatch])
 
 	return (
@@ -49,8 +53,10 @@ function DashboardSell() {
 					</div>
 				)
 			})}
+
+			<Link to="/dashboard/bid/edit"> Go to post a new sell</Link>
 		</div>
 	)
 }
 
-export default DashboardSell 
+export default DashboardSell

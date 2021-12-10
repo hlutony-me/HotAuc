@@ -31,10 +31,10 @@ function Dashboard(props) {
 						Profile
 					</Button>
 					<Button variant="primary" onClick={handleSellSelection}>
-						Bid
+						Sell
 					</Button>
 					<Button variant="primary" onClick={handleBidSelection}>
-						Sell
+						Bid
 					</Button>
 				</ButtonGroup>
 			</div>
