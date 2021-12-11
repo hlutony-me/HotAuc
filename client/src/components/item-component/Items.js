@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import "./Items.css"
 import axios from "axios"
@@ -7,8 +7,11 @@ import { Link } from "react-router-dom"
 
 const Items = () => {
 	const items = useSelector((state) => state.item.value)
+
 	//Set dispatch for Redux
 	const dispatch = useDispatch()
+
+	const [loading, setLoading] = useState(true)
 	useEffect(() => {
 		const fetchItems = async () => {
 			try {
@@ -21,9 +24,10 @@ const Items = () => {
 				}
 
 				const res = await axios.get("/api/item/all", config)
-				console.log(res)
 
 				dispatch(setSearchResult(res.data))
+				console.log(res.data)
+				setLoading(false)
 			} catch (error) {
 				console.log(error)
 			}
@@ -32,14 +36,20 @@ const Items = () => {
 		fetchItems()
 	}, [dispatch])
 
-	return (
+	const cards = (
 		<div className="cards">
 			{items.map((item) => {
 				return (
 					<div className="card">
 						<Link to={`/item/${item._id}`} className="no-decoration">
 							<div className="card-body">
-								<img src={item.images[0].uri} />
+								<img
+									src={
+										item.images[0]
+											? item.images[0].uri
+											: "https://previews.123rf.com/images/happyvector071/happyvector0711608/happyvector071160800591/62947847-abstract-creative-vector-design-layout-with-text-do-not-exist-.jpg"
+									}
+								/>
 
 								<p> </p>
 								<h2>{item.title}</h2>
@@ -54,5 +64,7 @@ const Items = () => {
 			})}
 		</div>
 	)
+
+	return <>{!loading && cards}</>
 }
 export default Items

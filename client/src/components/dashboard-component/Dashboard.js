@@ -27,13 +27,13 @@ function Dashboard(props) {
 		<Fragment>
 			<div>
 				<ButtonGroup aria-label="Basic example">
-					<Button variant="secondary" onClick={handleProfileSelection}>
+					<Button variant="primary" onClick={handleProfileSelection}>
 						Profile
 					</Button>
-					<Button variant="secondary" onClick={handleSellSelection}>
+					<Button variant="primary" onClick={handleSellSelection}>
 						Sell
 					</Button>
-					<Button variant="secondary" onClick={handleBidSelection}>
+					<Button variant="primary" onClick={handleBidSelection}>
 						Bid
 					</Button>
 				</ButtonGroup>
