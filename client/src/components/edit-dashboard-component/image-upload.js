@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap"
 import "./image-upload.css"
 import axios from "axios"
+import { SERVER_URL } from "../../ConstantValue"
 
 function ImageUpload() {
 	const userId = useSelector((state) => state.userInfor.user._id)
@@ -68,7 +69,7 @@ function ImageUpload() {
 			const body = JSON.stringify(item)
 			console.log(body)
 			//Make request
-			const res = await axios.post("/api/item/", body, config)
+			const res = await axios.post(`${SERVER_URL}item`, body, config)
 			//Use the data in res
 			console.log(res.data)
 		} catch (error) {

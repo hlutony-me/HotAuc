@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-
 const itemSlice = createSlice({
 	name: "item",
 	initialState: {
@@ -12,7 +11,6 @@ const itemSlice = createSlice({
 		}
 	}
 })
-
 
 export const { setSearchResult } = itemSlice.actions
 export default itemSlice.reducer

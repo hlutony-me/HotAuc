@@ -3,11 +3,12 @@ import { Link } from "react-router-dom"
 import "./Navbar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { setSearchResult } from "../redux/features/itemSlice"
+import { SERVER_URL } from "../ConstantValue"
 import axios from "axios"
 
 const NavBar = () => {
 	// const value = useContext(UserContext)
-	const value = useSelector(state => state.userInfor.user?.email)
+	const value = useSelector((state) => state.userInfor.user?.email)
 
 	const [searchCondition, setSearchCondition] = useState("")
 
@@ -31,7 +32,7 @@ const NavBar = () => {
 			}
 
 			const res = await axios.get(
-				"/api/item/search",
+				`${SERVER_URL}item/search`,
 				{ params: { title: searchCondition } },
 				config
 			)

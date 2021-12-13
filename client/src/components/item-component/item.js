@@ -1,56 +1,55 @@
-import React from "react";
+import React from "react"
 
-import { useParams } from "react-router";
+import { useParams } from "react-router"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-import "./Items.css";
-
-import axios from "axios";
+import "./Items.css"
+import { SERVER_URL } from "../../ConstantValue"
+import axios from "axios"
 
 const Item = () => {
-  const { id } = useParams();
+	const { id } = useParams()
 
-  console.log(id);
+	console.log(id)
 
-  const currentDateTime = Date().toLocaleString();
+	const currentDateTime = Date().toLocaleString()
 
-  const [data, setData] = useState(null);
+	const [data, setData] = useState(null)
 
-  const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        //Set request header
+	useEffect(() => {
+		const fetchItem = async () => {
+			try {
+				//Set request header
 
-        const config = {
-          headers: {
-            "Content-Type": "Application/json",
-          },
-        };
+				const config = {
+					headers: {
+						"Content-Type": "Application/json"
+					}
+				}
 
-        const res = await axios.get(
-          `http://localhost:5000/api/item/${id}`,
+				const res = await axios.get(
+					`${SERVER_URL}item/${id}`,
+					config
+				)
 
-          config
-        );
+				console.log(res)
 
-        console.log(res);
+				setData(res.data)
 
-        setData(res.data);
+				setLoading(false)
+			} catch (error) {
+				console.log(error)
+			}
+		}
 
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+		fetchItem()
+	}, [])
 
-    fetchItem();
-  }, []);
-
-  return (
-    /*{ <div className="cards">
+	return (
+		/*{ <div className="cards">
                  {" "}
       <div className="card">
                        {" "}
@@ -64,27 +63,25 @@ const Item = () => {
     </div> 
 }*/
 
-    <div className="items">
-      <div className="home">
-        <h1>{!loading && data.title}</h1>
-        <div className="stuff">
-          <img
-            class="image"
-            src={!loading && data.images[0].uri}
-            alt="Random Img"
-          />
-          <p class="text">
-            Current Price: ${!loading && data.startingPrice}
-          </p>
-          <p class="text">End Time: {!loading && data.endTime}</p>
-          <div class="bid">
-            Bidding Price : <input class="txtPrice" placeholder="Price"></input>
-            <button class="btn btn-primary">Bid</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+		<div className="items">
+			<div className="home">
+				<h1>{!loading && data.title}</h1>
+				<div className="stuff">
+					<img
+						class="image"
+						src={!loading && data.images[0].uri}
+						alt="Random Img"
+					/>
+					<p class="text">Current Price: ${!loading && data.startingPrice}</p>
+					<p class="text">End Time: {!loading && data.endTime}</p>
+					<div class="bid">
+						Bidding Price : <input class="txtPrice" placeholder="Price"></input>
+						<button class="btn btn-primary">Bid</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+}
 
-export default Item;
+export default Item

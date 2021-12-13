@@ -2,6 +2,7 @@ const express = require("express")
 const connectDB = require("./config/db")
 const swaggerUi = require("swagger-ui-express")
 const swaggerDocument = require("./swagger.json")
+const cors = require("cors")
 
 const app = express()
 
@@ -43,6 +44,10 @@ app.get("/", (req, res) => {
 // 	// Pass to next layer of middleware
 // 	next()
 // })
+
+//Handle cors
+
+app.use(cors())
 
 //Use Swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))

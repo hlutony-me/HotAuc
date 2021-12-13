@@ -5,6 +5,7 @@ import {
 	setResultError
 } from "../../../redux/features/dashboardItemsSlice"
 import { Link } from "react-router-dom"
+import { SERVER_URL } from "../../../ConstantValue"
 import axios from "axios"
 
 function DashboardSell() {
@@ -24,7 +25,7 @@ function DashboardSell() {
 			}
 
 			const res = await axios
-				.get(`api/userid/${userId}`, config)
+				.get(`${SERVER_URL}userid/${userId}`, config)
 				.catch((error) => dispatch(setResultError("not found")))
 
 			dispatch(setSearchResult(res))

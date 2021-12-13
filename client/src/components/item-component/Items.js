@@ -4,6 +4,7 @@ import "./Items.css"
 import axios from "axios"
 import { setSearchResult } from "../../redux/features/itemSlice"
 import { Link } from "react-router-dom"
+import { SERVER_URL } from "../../ConstantValue"
 
 const Items = () => {
 	const items = useSelector((state) => state.item.value)
@@ -23,7 +24,7 @@ const Items = () => {
 					}
 				}
 
-				const res = await axios.get("/api/item/all", config)
+				const res = await axios.get(`${SERVER_URL}item/all`, config)
 
 				dispatch(setSearchResult(res.data))
 				console.log(res.data)
