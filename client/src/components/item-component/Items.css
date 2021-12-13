@@ -25,10 +25,12 @@ h5 {
 }
 
 .cards {
-  display: flex;
-  align-items: flex-start;
-  justify-content: left;
-  text-decoration: none;
+  display: grid;
+  margin: 0 auto;
+  max-width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: fit-content;
 }
 
 .card {
