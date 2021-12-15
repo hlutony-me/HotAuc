@@ -3,8 +3,8 @@ const router = express.Router()
 //Middleware
 const auth = require("../../middleware/auth")
 
-const User = require('../../models/user')
-const Item = require('../../models/auction_item')
+const User = require("../../models/user")
+const Item = require("../../models/auction_item")
 
 //@route   GET api/user
 //@desc    Test route
@@ -27,6 +27,18 @@ router.get("/:userId", auth, async (req, res) => {
 	try {
 		const items = await Item.find({ "bids.bidder": { $in: [userId] } })
 		res.json(items)
+	} catch (err) {
+		console.log(err.message)
+		res.status(500).json({ msg: "User not authenticated" })
+	}
+})
+
+router.put("/:userId", async (req, res) => {
+	var userId = req.params.userId
+	try {
+		const user = await User.findOneAndUpdate({ _id: userId }, req.body)
+		const respond = await User.findById(userId)
+		res.json(respond)
 	} catch (err) {
 		console.log(err.message)
 		res.status(500).json({ msg: "User not authenticated" })
