@@ -33,4 +33,8 @@ router.get("/:userId", auth, async (req, res) => {
 	}
 })
 
+router.put("/:userId", auth, async (req, res) => {
+	var userId = req.params.userId
+})
+
 module.exports = router
