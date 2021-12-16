@@ -13,6 +13,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@nestjs/testing": "^8.2.3",
 		"@reduxjs/toolkit": "^1.6.2",
 		"axios": "^0.24.0",
 		"bcryptjs": "^2.4.3",
@@ -24,9 +25,11 @@
 		"express-validator": "^6.13.0",
 		"fill-range": "^7.0.1",
 		"gravatar": "^1.8.2",
+		"i": "^0.3.7",
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.0.12",
 		"negotiator": "^0.6.2",
+		"npm": "^8.3.0",
 		"react-bootstrap": "^2.0.2",
 		"swagger-ui-express": "^4.1.6"
 	},
