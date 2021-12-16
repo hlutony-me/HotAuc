@@ -13,6 +13,7 @@ import {
 import "./image-upload.css"
 import axios from "axios"
 import { SERVER_URL } from "../../ConstantValue"
+import { useNavigate } from "react-router-dom"
 
 function ImageUpload() {
 	const userId = useSelector((state) => state.userInfor.user._id)
@@ -25,7 +26,7 @@ function ImageUpload() {
 
 	const [imageUploaded, setImageUploaded] = useState(false)
 
-	//const [user, setUser] = useState("")
+	const navigate = useNavigate()
 
 	const [item, setItem] = useState({
 		title: "",
@@ -70,7 +71,8 @@ function ImageUpload() {
 			console.log(body)
 			//Make request
 			const res = await axios.post(`${SERVER_URL}item`, body, config)
-			//Use the data in res
+			navigate("/dashboard")
+
 			console.log(res.data)
 		} catch (error) {
 			console.log(error)

@@ -45,4 +45,18 @@ router.put("/:userId", async (req, res) => {
 	}
 })
 
+//@route   GET api/user/email/:email
+//@desc    Test route
+//@access  Public
+router.get("/email/:email", async (req, res) => {
+	var email = req.params.email
+	try {
+		const user = await User.findOne({ email })
+		res.json(user)
+	} catch (err) {
+		console.log(err.message)
+		res.status(500).json({ msg: "User not authenticated" })
+	}
+})
+
 module.exports = router

@@ -9,10 +9,9 @@ import { SERVER_URL } from "../../../ConstantValue"
 import axios from "axios"
 
 function DashboardSell() {
-	const items = useSelector((state) => state.dashboardItem.value)
 	const userId = useSelector((state) => state.userInfor.user._id)
 	//Set dispatch for Redux
-	const dispatch = useDispatch()
+	const [items, setItems] = useState([])
 
 	useEffect(() => {
 		const fetchItems = async () => {
@@ -24,16 +23,13 @@ function DashboardSell() {
 				}
 			}
 
-			const res = await axios
-				.get(`${SERVER_URL}userid/${userId}`, config)
-				.catch((error) => dispatch(setResultError("not found")))
+			const res = await axios.get(`${SERVER_URL}item/userid/${userId}`, config)
 
-			dispatch(setSearchResult(res))
+			setItems(res.data)
 		}
 
 		fetchItems()
-		console.log("items", items)
-	}, [dispatch])
+	}, [])
 
 	return (
 		<div className="dashboard-sell">
