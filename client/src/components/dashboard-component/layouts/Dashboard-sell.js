@@ -15,7 +15,7 @@ function DashboardSell() {
 
 	useEffect(() => {
 		const fetchItems = async () => {
-			console.log("called")
+			console.log("called get sells")
 			//Set request header
 			const config = {
 				headers: {
@@ -24,7 +24,7 @@ function DashboardSell() {
 			}
 
 			const res = await axios.get(`${SERVER_URL}item/userid/${userId}`, config)
-
+			console.log(res.data)
 			setItems(res.data)
 		}
 
@@ -38,13 +38,14 @@ function DashboardSell() {
 					<div className="card">
 						<div className="card-body">
 							{item.images.map((prop) => (
-								<img src={prop.uri} alt="hotwheels image" />
+								<img src={item.images[0].uri} alt="hotwheels image" />
 							))}
 							<p> </p>
 							<h2>{item.title}</h2>
 							<p>Color: {item.color}</p>
 							<p>Description: {item.description}</p>
 							<p>Year: {item.year}</p>
+							<p>Current Price: {item.currentPrice}</p>
 							<p>End Time: {item.endTime}</p>
 						</div>
 					</div>

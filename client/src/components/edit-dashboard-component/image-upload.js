@@ -22,7 +22,7 @@ function ImageUpload() {
 
 	const [images, setImage] = useState([])
 
-	const [imageUri, setImageUri] = useState([])
+	const [imageUri, setImageUri] = useState("")
 
 	const [imageUploaded, setImageUploaded] = useState(false)
 
@@ -36,6 +36,7 @@ function ImageUpload() {
 		seller: userId,
 		endTime: "",
 		startingPrice: "",
+		currentPrice:"",
 		images: []
 	})
 
@@ -48,13 +49,25 @@ function ImageUpload() {
 		if (imageUri.length == images.length) {
 			setImageUploaded(true)
 		}
-		if (imageUploaded == false) {
-			alert("Please wait until images loaded")
-		}
+
 		//console.log(imageUri)
 		console.log(userId)
 
-		setItem({ ...item, images: imageUri })
+		const imageObj = { images: imageUri }
+		console.log(imageObj)
+		const newItem = {
+			title: item.title,
+			description: item.description,
+			color: item.color,
+			year: item.year,
+			seller: userId,
+			endTime: item.endTime,
+			startingPrice: item.startingPrice,
+			currentPrice: item.startingPrice,
+			images: [{ uri:imageUri }]
+		}
+		setItem(newItem)
+		//setItem({ ...item ,currentPrice:item.startingPrice})
 		console.log(item)
 
 		//Post item
@@ -92,9 +105,9 @@ function ImageUpload() {
 				const snapshot = uploadBytes(imageRef, image).then((snapshot) => {
 					getDownloadURL(imageRef).then((uri) => {
 						const newUri = { uri }
-						console.log(newUri)
-						setImageUri([...imageUri, newUri])
+						setImageUri( uri)
 						console.log(imageUri)
+						setImageUploaded(true)
 					})
 				})
 			})

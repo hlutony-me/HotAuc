@@ -49,11 +49,9 @@ router.get("/userid/:id", async (req, res) => {
 		res.json(items)
 	} catch (err) {
 		console.log(err.message)
-		res
-			.status(500)
-			.json({
-				msg: "Auction Item search error - items by userid:" + err.message
-			})
+		res.status(500).json({
+			msg: "Auction Item search error - items by userid:" + err.message
+		})
 	}
 })
 
@@ -62,16 +60,14 @@ router.get("/userid/:id", async (req, res) => {
 //@access  Public
 router.get("/bidder/:id", async (req, res) => {
 	var userId = req.params.id
-	try {		
+	try {
 		const items = await AuctionItem.find({ "bids.bidder": { $in: [userId] } })
 		res.json(items)
 	} catch (err) {
 		console.log(err.message)
-		res
-			.status(500)
-			.json({
-				msg: "Auction Item search error - items by bidder (userid):" + err.message
-			})
+		res.status(500).json({
+			msg: "Auction Item search error - items by bidder (userid):" + err.message
+		})
 	}
 })
 
@@ -122,6 +118,34 @@ router.delete("/:id", function (req, res, next) {
 		if (err) return next(err)
 		res.json(post)
 	})
+})
+
+//@route   Put api/item/{itemId}/user/{userId}
+//@access  Public
+//Add user to the bidder list of the item
+router.put("/:itemId/user/:userId", async(req, res) => {
+	try {
+		const itemId = req.params.itemId
+		const userId = req.params.userId
+		const price = req.body.price
+		const itemInDb =await AuctionItem.findById(itemId)
+		var bids = itemInDb.bids
+
+		console.log(bids)
+		const newBid = {
+			price: price,
+			bidder: userId,
+			bidTime: Date.now()
+		}
+		bids = [...bids, newBid]
+
+		await AuctionItem.findByIdAndUpdate(itemId, { bids: bids })
+		await AuctionItem.findByIdAndUpdate(itemId, { currentPrice:price })
+		const result = await AuctionItem.findById(itemId)
+		res.json(result)
+	} catch (error) {
+		res.json({ msg: error.message })
+	}
 })
 
 module.exports = router

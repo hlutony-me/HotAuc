@@ -1,5 +1,5 @@
 import React from "react"
-
+import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router"
 
 import { useEffect, useState } from "react"
@@ -7,17 +7,40 @@ import { useEffect, useState } from "react"
 import "./Items.css"
 import { SERVER_URL } from "../../ConstantValue"
 import axios from "axios"
+import { async } from "@firebase/util"
 
 const Item = () => {
 	const { id } = useParams()
+	const userId = useSelector((state) => state.userInfor.user._id)
 
-	console.log(id)
 
-	const currentDateTime = Date().toLocaleString()
+	const [price, setPrice] = useState(0)
+
+	const [currentPrice,setCurrentPrice] = useState(0)
 
 	const [data, setData] = useState(null)
 
 	const [loading, setLoading] = useState(true)
+
+	const onPriceInputChange = (e) => {
+		setPrice(e.target.value)
+	}
+
+	const handleSubmitPrice = async(e) => {
+		e.preventDefault()
+
+		const body = { price }
+		const config = {
+			headers: {
+				"Content-Type": "Application/json"
+			}
+		}
+
+		const res = await axios.put(`${SERVER_URL}item/${data._id}/user/${userId}`, body, config)
+		setData(res.data)
+		console.log(res.data)
+		
+	}
 
 	useEffect(() => {
 		const fetchItem = async () => {
@@ -30,10 +53,7 @@ const Item = () => {
 					}
 				}
 
-				const res = await axios.get(
-					`${SERVER_URL}item/${id}`,
-					config
-				)
+				const res = await axios.get(`${SERVER_URL}item/${id}`, config)
 
 				console.log(res)
 
@@ -49,20 +69,6 @@ const Item = () => {
 	}, [])
 
 	return (
-		/*{ <div className="cards">
-                 {" "}
-      <div className="card">
-                       {" "}
-        <div className="card-body">
-                              <p>Title: {!loading && data.title}</p>           
-                  <h2>{id}</h2>               {" "}
-        </div>
-                   {" "}
-      </div>
-             {" "}
-    </div> 
-}*/
-
 		<div className="items">
 			<div className="home">
 				<h1>{!loading && data.title}</h1>
@@ -72,12 +78,21 @@ const Item = () => {
 						src={!loading && data.images[0].uri}
 						alt="Random Img"
 					/>
-					<p class="text">Current Price: ${!loading && data.startingPrice}</p>
+					<p class="text">Current Price: ${!loading && data.currentPrice}</p>
 					<p class="text">End Time: {!loading && data.endTime}</p>
-					<div class="bid">
-						Bidding Price : <input class="txtPrice" placeholder="Price"></input>
-						<button class="btn btn-primary">Bid</button>
-					</div>
+					<form onSubmit={(e) => handleSubmitPrice(e)}>
+						<div class="bid">
+							Bidding Price :
+							<input
+								class="txtPrice"
+								value={price}
+								onChange={(e) => onPriceInputChange(e)}
+							></input>
+							<button type="submit" class="btn btn-primary">
+								Bid
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

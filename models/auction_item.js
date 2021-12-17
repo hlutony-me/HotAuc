@@ -30,6 +30,10 @@ const AuctionItemSchema = new mongoose.Schema({
 		type: Number,
 		required: true
 	},
+	currentPrice: {
+		type: Number,
+		required: true
+	},
 	images: [
 		{
 			uri: {
